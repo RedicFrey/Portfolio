@@ -5,23 +5,84 @@
     margin: 0px;
     box-sizing: border-box;
 }
-body
-{
+body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+    color: #000; /* default text color for bright / light mode */
 }
 :root {
     /* Welcome-Colors */     
-        --Welcome-Background: rgb(255, 252, 223);
-        --Welcome-Text-Primary: #8678AA;
-        --Welcome-text-Secondary: #749978;
-        --Welcome-text-Daniel: #5C37B9;
-        --Welcome-text-Developer: #157c1f;
+    --Welcome-Background: rgb(255, 252, 223);
+    --Welcome-Text-Primary: #8678AA;
+    --Welcome-text-Secondary: #749978;
+    --Welcome-text-Daniel: #5C37B9;
+    --Welcome-text-Developer: #157c1f;
     /* Welcome colors end*/
 
     --Soft-Skills-Background: #FFCC9C;
     --Hard-Skills-Background: #8678AA;
+}
 
+/* Dark mode colors */
+body.dark-mode {
+    --Welcome-Background: rgb(40, 40, 45);
+    --Welcome-Text-Primary: #a599d0;
+    --Welcome-text-Secondary: #8ab98e;
+    --Welcome-text-Daniel: #8b6edb;
+    --Welcome-text-Developer: #45a850;
+    --Soft-Skills-Background: #8b5c2e;
+    --Hard-Skills-Background: #564c77;
+    color: #ffffff;
+}
+
+/* Dark mode toggle styles */
+.darkmode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#darkmode-toggle {
+    appearance: none;
+    width: 40px;
+    height: 20px;
+    background: #ddd;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#darkmode-toggle:checked {
+    background: #564c77;
+}
+
+#darkmode-toggle::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+}
+
+#darkmode-toggle:checked::before {
+    transform: translateX(20px);
+}
+
+#darkmode-label {
+    font-family: 'Koh Santepheap', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
 }
 /* Welcome Section */ 
 
@@ -85,6 +146,74 @@ body
 }
 
 
+.Darkmode {
+    font-family: 'Koh Santepheap', sans-serif;
+    font-size: 20px;
+    color: var(--Welcome-text-Daniel);
+    margin-top: 2%;
+}
+
+label { position: relative;
+width: 60px;
+height: 30px;
+z-index: 97;
+border-radius:50px;
+display: inline-block;}
+
+input[type="checkbox"]{ width: 100%;
+height: 100%;
+position: absolute;
+z-index: 99;
+opacity: 0;}
+
+.btndark { width: 100%;
+height: 100%;
+border-radius: 50px;
+background-color: bisque;
+transition: 0.5s;
+display: inline-block;}
+
+.btndark::before {content: "";
+width: 29px;
+height: 29px;
+border-radius: 50%;
+background-color: goldenrod;
+position: absolute;
+transition: 0.5s;
+left: 0;
+top: 0; }
+
+input:checked+.btndark::before {left: 50%;
+background-color: navy; }
+
+input:checked+.btndark { background-color: darkslategrey;}
+
+
+.dark { background-color: black;
+color: white;}
+
+.dark #modal { background-color: rgb(36, 36, 36);}
+
+a { text-decoration: none;
+color: inherit; }
+
+.dark a { color: white;}
+
+section { height: 100vh;}
+
+#pagina3 { background-color: aquamarine;}
+
+
+input[type="text"]{
+    opacity: 1;
+
+}
+
+#result { border: solid;
+width: 30px;
+height: 30px;
+border: solid 1px;}
+
 /*End Welcome Section */
 
 /* Soft Skills Section */
@@ -95,20 +224,15 @@ body
 }
 
 .Skills-Grid {
-    width: 100%;
-    height: 100%;
+    width: 88%;
+    height: 10%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    padding: 2rem;
-    gap: 2rem;
+    padding: 1rem;
+    gap: 1rem;
 }
 
-/* Styles that match the user's class names (some have spaces -> multiple classes)
-   Top-left: .Img-Me
-   Top-right: element with classes .Meet and .me (selector: .Meet.me)
-   Bottom-left: element with classes .the .road .ahead (selector: .the.road.ahead)
-   Bottom-right: element with classes .Link .Tree (selector: .Link.Tree) */
 
 .Img-Me {
     display: flex;
@@ -117,14 +241,8 @@ body
 }
 
 .Img-Me .Circle-Bg {
-    width: 38vh;
-    height: 38vh;
-    border-radius: 50%;
-    background: var(--Welcome-Background);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 0 0 6px rgba(0,0,0,0.02);
+   border-radius: 50%; 
+   width: 50%;
 }
 
 .Img-Me .Profile-Image {
@@ -134,33 +252,6 @@ body
     border-radius: 50%;
 }
 
-/* Meet card: element with classes "Meet" and "me" */
-.Meet.me,
-/* The Road Ahead card uses three classes: the road ahead */
-.the.road.ahead,
-/* Link Tree placeholder (two classes) */
-.Link.Tree {
-    background-color: rgba(139, 111, 91, 0.95); /* brown */
-    border-radius: 12px;
-    padding: 2rem;
-    color: white;
-}
-
-.Meet.me h2,
-.the.road.ahead h2 {
-    font-family: 'Koh Santepheap', serif;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-}
-
-.Meet.me .Card-Content p,
-.the.road.ahead .Card-Content p {
-    font-family: 'Koh Santepheap', sans-serif;
-    font-style: italic;
-    line-height: 1.6;
-}
-
-/* Link Tree styles (element with classes Link and Tree => selector .Link.Tree) */
 .Link.Tree {
     background-color: rgba(139,111,91,0.95);
     border-radius: 12px;
@@ -246,21 +337,7 @@ body
     gap: 1.5rem;
 }
 
-.Circle-Image {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto;
-    background-color: white;
-}
 
-.Card-Content p {
-    font-family: 'Koh Santepheap', sans-serif;
-    font-size: 1rem;
-    line-height: 1.6;
-    font-style: italic;
-}
 
 .About-Card p, .Work-Status {
     font-family: 'Koh Santepheap', sans-serif;
@@ -318,6 +395,8 @@ body
     gap: 3.5rem;
 }
 
+
+
 .Projects-Card{
     background-color: var(--Welcome-Background);
     border-radius: 12px;
@@ -366,6 +445,13 @@ body
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.Proj-Tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
 .Proj-Tile:hover {
     transform: translateY(-6px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.12);
@@ -375,25 +461,74 @@ body
     background: rgba(134,120,170,0.08);
 }
 
-/* Stack icon layout inside project tiles */
+/* Stack layout and styling */
+.Stack-Grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.Proj-Tile[data-stack] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: var(--Hard-Skills-Background);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .Proj-Tile[data-stack] {
+    background: rgba(134, 120, 170, 0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.Proj-Tile[data-stack]:hover {
+    transform: translateY(-5px);
+    background: var(--Welcome-text-Daniel);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .Proj-Tile[data-stack]:hover {
+    background: rgba(134,120,170,0.04);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
+}
 .Proj-Tile .Stack-Icon {
-    display: block;
-    width: 64px;
-    height: 64px;
-    margin: 18px auto 6px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 12px;
+    filter: brightness(1.1);
+}
+
+body.dark-mode .Proj-Tile .Stack-Icon {
+    filter: brightness(1.2) contrast(1.1);
+}
+
+.Proj-Tile .Stack-Icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .Proj-Tile .Stack-Label {
     display: block;
     text-align: center;
     font-size: 14px;
-    color: #ffffff;
-    font-family: Arial, Helvetica, sans-serif;
+    color: var(--Welcome-Background);
+    font-family: 'Koh Santepheap', sans-serif;
+    font-weight: 500;
+    margin-top: 8px;
+    transition: color 0.3s ease;
 }
 
-/* Make labels visible on light backgrounds too */
-.Proj-Tile[data-stack] .Stack-Label {
-    color: #fff;
+body.dark-mode .Proj-Tile .Stack-Label {
+    color: var(--Welcome-Text-Primary);
 }
 
 .Projects-Grid.placeholder .Proj-Tile.empty {
@@ -401,3 +536,102 @@ body
 }
 
 /* End Hard Skills Section */
+
+/* Contact Modal (dialog) styles */
+.Contact-Modal {
+    display: none; /* toggled by JS */
+    position: fixed;
+    inset: 0; /* top:0; right:0; bottom:0; left:0 */
+    background: rgba(0,0,0,0.45);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.Contact-Modal[aria-hidden="true"] {
+    display: none;
+}
+
+.Contact-Modal-Content {
+    width: 100%;
+    max-width: 640px;
+    background: var(--Welcome-Background);
+    color: inherit;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+    transform: translateY(0);
+    transition: transform 0.18s ease, opacity 0.18s ease;
+    color: black;
+}
+
+
+.Contact-Modal-Close {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.25rem;
+    background: transparent;
+    border: none;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--Welcome-text-Daniel);
+}
+
+/* Ensure form controls are visible on dark-mode backgrounds */
+body.dark-mode .Contact-Modal-Content {
+    background: #2a2a30;
+    color: #fff;
+}
+
+/* Small responsive tweak */
+@media (max-width: 520px) {
+    .Contact-Modal-Content { padding: 1rem; max-width: 92%; }
+}
+
+/* Contact form controls */
+.Contact-Modal-Content form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.Contact-Modal-Content .Form-Group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.Contact-Modal-Content label {
+    font-family: 'Koh Santepheap', sans-serif;
+    font-size: 0.95rem;
+}
+
+.Contact-Modal-Content input[type="text"],
+.Contact-Modal-Content input[type="email"],
+.Contact-Modal-Content input[type="tel"],
+.Contact-Modal-Content textarea {
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,0.08);
+    font-family: 'Koh Santepheap', sans-serif;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Fixed-size message textbox and disable manual resize */
+.Contact-Modal-Content textarea#contact-message {
+    height: 140px; /* fixed height */
+    max-height: 140px;
+    resize: none;
+}
+
+/* Phone input: set a reasonable fixed width on larger screens */
+.Contact-Modal-Content input#contact-phone {
+    max-width: 260px;
+}
+
+
